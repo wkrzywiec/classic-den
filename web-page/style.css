@@ -33,3 +33,11 @@ body {
   .marketing p + h4 {
     margin-top: 28px;
   }
+
+  #descriptionTextarea {
+    background-color: white;
+    color: black;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 10px;
+  }

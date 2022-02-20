@@ -1,101 +1,115 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>Template &middot; Bootstrap</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="Wojciech Krzywiec">
 
-    <!-- Le styles -->
-    <link href="assets/css/bootstrap.css" rel="stylesheet">
-    <link href="style.css" rel="stylesheet">
-    <link href="assets/css/bootstrap-responsive.css" rel="stylesheet">
+    <head>
+        <meta charset="utf-8">
+        <title>Template &middot; Bootstrap</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="">
+        <meta name="author" content="Wojciech Krzywiec">
+        <link href="assets/css/bootstrap.css" rel="stylesheet">
+        <link href="style.css" rel="stylesheet">
+        <link rel="shortcut icon" href="../assets/ico/favicon.png">
+    </head>
 
-    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-    <!--[if lt IE 9]>
-      <script src="../assets/js/html5shiv.js"></script>
-    <![endif]-->
+    <body>
 
-    <!-- Fav and touch icons -->
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
-      <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
-                    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
-                                   <link rel="shortcut icon" href="../assets/ico/favicon.png">
-  </head>
+        <div class="container-narrow">
 
-  <body>
+            <div class="masthead">
+                <ul class="nav nav-pills pull-right">
+                    <li class="active"><a href="#">Home</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+                <h3 class="muted">Classic Den</h3>
+            </div>
 
-    <div class="container-narrow">
+            <hr>
 
-      <div class="masthead">
-        <ul class="nav nav-pills pull-right">
-          <li class="active"><a href="#">Home</a></li>
-          <li><a href="#">About</a></li>
-          <li><a href="#">Contact</a></li>
-        </ul>
-        <h3 class="muted">Classic Den</h3>
-      </div>
+            <div class="jumbotron">
+                <h1>Super awesome marketing speak!</h1>
+                <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus
+                    commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
 
-      <hr>
+                <button type="button" class="btn btn-large btn-success" data-toggle="modal" data-target="#addEntryModal">
+                    Add Entry
+                </button>
 
-      <div class="jumbotron">
-        <h1>Super awesome marketing speak!</h1>
-        <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-        <a class="btn btn-large btn-success" href="#">Sign up today</a>
-      </div>
+                <div class="modal fade" id="addEntryModal" tabindex="-1" role="dialog" aria-labelledby="addEntryModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="addEntryModalLabel">Add new entry to a board</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <form>
+                                <div class="modal-body">
+                                    <h2 class="form-signin-heading" style="margin-bottom: 20px;">What you would like to share?</h2>
+                                    
+                                    <div class="d-flex flex-column" style="margin-bottom: 20px;">
+                                        <label for="titleText">Title</label>
+                                        <input type="text" id="titleText" class="input-block-level" placeholder="Title">
+                                    </div>
+                                    
+                                    <div class="d-flex flex-column">
+                                        <label for="descriptionTextarea">Description</label>
+                                        <textarea class="form-control" id="descriptionTextarea" rows="6"></textarea>
+                                    </div>
+                                    
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary" type="submit">Save changes</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-      <hr>
+            <hr>
 
-      <div class="row-fluid marketing">
-        <div class="span6">
-          <h4>Subheading</h4>
-          <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
+            <div class="row-fluid marketing">
+                <div class="span6">
+                    <h4>Subheading</h4>
+                    <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
 
-          <h4>Subheading</h4>
-          <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.</p>
+                    <h4>Subheading</h4>
+                    <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet
+                        fermentum.</p>
 
-          <h4>Subheading</h4>
-          <p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
-        </div>
+                    <h4>Subheading</h4>
+                    <p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
+                </div>
 
-        <div class="span6">
-          <h4>Subheading</h4>
-          <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
+                <div class="span6">
+                    <h4>Subheading</h4>
+                    <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
 
-          <h4>Subheading</h4>
-          <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.</p>
+                    <h4>Subheading</h4>
+                    <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet
+                        fermentum.</p>
 
-          <h4>Subheading</h4>
-          <p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
-        </div>
-      </div>
+                    <h4>Subheading</h4>
+                    <p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
+                </div>
+            </div>
 
-      <hr>
+            <hr>
 
-      <div class="footer">
-        <p>&copy; Wojciech Krzywiec 2022</p>
-      </div>
+            <div class="footer">
+                <p>&copy; Wojciech Krzywiec 2022</p>
+            </div>
 
-    </div> <!-- /container -->
+        </div> 
 
-    <!-- Le javascript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="assets/js/jquery.js"></script>
-    <script src="assets/js/bootstrap-transition.js"></script>
-    <script src="assets/js/bootstrap-alert.js"></script>
-    <script src="assets/js/bootstrap-modal.js"></script>
-    <script src="assets/js/bootstrap-dropdown.js"></script>
-    <script src="assets/js/bootstrap-scrollspy.js"></script>
-    <script src="assets/js/bootstrap-tab.js"></script>
-    <script src="assets/js/bootstrap-tooltip.js"></script>
-    <script src="assets/js/bootstrap-popover.js"></script>
-    <script src="assets/js/bootstrap-button.js"></script>
-    <script src="assets/js/bootstrap-collapse.js"></script>
-    <script src="assets/js/bootstrap-carousel.js"></script>
-    <script src="assets/js/bootstrap-typeahead.js"></script>
+        <script src="assets/js/jquery.js"></script>
+        <script src="assets/js/bootstrap.js"></script>
+        <script src="assets/js/bootstrap.bundle.js"></script>
+    </body>
 
-  </body>
 </html>
