@@ -3,10 +3,6 @@ name: Deploy Java project to function app
 on:
   [push]
 
-defaults:
-  run:
-    working-directory: functions/add-entry-func
-
 env:
   AZURE_FUNCTIONAPP_NAME: add-entry-func
   POM_XML_DIRECTORY: './functions/add-entry-func'
@@ -29,8 +25,8 @@ jobs:
         shell: bash
         run: |
           pushd './${{ env.POM_XML_DIRECTORY }}'
-          mvn clean package
-          mvn azure-functions:package
+          mvn clean package -e
+          mvn azure-functions:package -e
           popd
       
       - name: 'Run Azure Functions Action'
