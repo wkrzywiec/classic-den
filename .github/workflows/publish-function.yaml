@@ -6,7 +6,7 @@ on:
 env:
   AZURE_FUNCTIONAPP_NAME: classic-den-add-entry-function
   POM_XML_DIRECTORY: './functions/add-entry-function'
-  POM_FUNCTIONAPP_NAME: add-entry-function
+  POM_FUNCTIONAPP_NAME: add-entry-function-1645599228225
   JAVA_VERSION: '1.8.x'
 
 jobs:
