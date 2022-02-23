@@ -22,10 +22,10 @@
     <surefire-plugin.version>3.0.0-M5</surefire-plugin.version>
 
     <azure.functions.maven.plugin.version>1.9.1</azure.functions.maven.plugin.version>
-    <functionAppName>add-entry-function</functionAppName>
+    <functionAppName>add-entry-func</functionAppName>
     <functionAppRegion>northeurope</functionAppRegion>
     <functionResourceGroup>hackhathon</functionResourceGroup>
-    <function>add-entry-function</function>
+    <function>add-entry-func</function>
     <stagingDirectory>${project.build.directory}/azure-functions/${functionAppName}</stagingDirectory>
     <quarkus.package.type>uber-jar</quarkus.package.type>
   </properties>
