@@ -23,4 +23,6 @@ jobs:
           java-version: 1.8
 
       - name: Maven Verify
-        run: mvn -B clean verify
+        run: |
+          ls functions/add-entry-function
+          mvn -B clean verify
