@@ -9,10 +9,13 @@ on:
       - 'main'
 
 jobs:
-
   test:
     name: Unit Test
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        function:
+          - 'add-entry-function'
 
     steps:
       - uses: actions/checkout@v2
@@ -24,5 +27,5 @@ jobs:
 
       - name: Maven Verify
         run: |
-          cd functions/add-entry-function
+          cd functions/${{ matrix.function }}
           mvn -B clean verify
