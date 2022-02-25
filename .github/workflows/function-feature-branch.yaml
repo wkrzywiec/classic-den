@@ -24,5 +24,5 @@ jobs:
 
       - name: Maven Verify
         run: |
-          ls functions/add-entry-function
+          cd functions/add-entry-function
           mvn -B clean verify
