@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - 'functions/**'
+      - '.github/**'
     branches-ignore:
       - 'main'
 
