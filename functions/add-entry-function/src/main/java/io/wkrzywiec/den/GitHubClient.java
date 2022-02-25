@@ -9,5 +9,6 @@ class GitHubClient {
 
         get(format("https://api.github.com/repos/%s/contents/%s", repository, filePath))
                 .header("Accept: application/vnd.github.v3+json");
+        return "";
     }
 }
