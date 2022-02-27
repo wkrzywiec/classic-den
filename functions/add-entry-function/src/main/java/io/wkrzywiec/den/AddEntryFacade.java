@@ -2,21 +2,28 @@ package io.wkrzywiec.den;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.http.client.HttpResponseException;
 
 import java.util.HashMap;
 import java.util.Map;
 
 class AddEntryFacade {
 
-    ObjectMapper objectMapper = new ObjectMapper();
-    GitHubClient gitHub = new GitHubClient();
+    private final ObjectMapper objectMapper;
+    private final GitHubClient gitHub;
 
-    void proccessRequest(String body) throws JsonProcessingException, IllegalArgumentException {
+    public AddEntryFacade(ObjectMapper objectMapper, GitHubClient gitHub) {
+        this.objectMapper = objectMapper;
+        this.gitHub = gitHub;
+    }
+
+
+    void proccessRequest(String body) throws JsonProcessingException, IllegalArgumentException, HttpResponseException {
 
         Map<String, String> requestMap = parseRequestBody(body);
         validateBody(requestMap);
 
-        String indexHtmlContent = gitHub.loadFileFrom("wkrzywiec/classic-den", "web-page/index.html");
+        String indexHtmlContent = gitHub.loadFileFrom("wkrzywiec/classic-den", "main", "web-page/entries.html");
 
     }
 

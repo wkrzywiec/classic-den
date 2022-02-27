@@ -1,6 +1,7 @@
 package io.wkrzywiec.den
 
 import com.fasterxml.jackson.core.JsonProcessingException
+import com.fasterxml.jackson.databind.ObjectMapper
 import spock.lang.Specification
 import spock.lang.Subject
 import spock.lang.Unroll
@@ -9,9 +10,10 @@ import spock.lang.Unroll
 class AddEntryFacadeSpec extends Specification {
 
     AddEntryFacade facade
+    GitHubClient gitHub = Stub(GitHubClient)
 
     def setup() {
-        facade = new AddEntryFacade()
+        facade = new AddEntryFacade(new ObjectMapper(), gitHub)
     }
 
     @Unroll

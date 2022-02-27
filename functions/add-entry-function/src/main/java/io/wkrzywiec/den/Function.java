@@ -10,6 +10,7 @@ import com.microsoft.azure.functions.HttpStatus;
 import com.microsoft.azure.functions.annotation.AuthorizationLevel;
 import com.microsoft.azure.functions.annotation.FunctionName;
 import com.microsoft.azure.functions.annotation.HttpTrigger;
+import org.apache.http.client.HttpResponseException;
 
 import java.util.Optional;
 
@@ -17,7 +18,7 @@ import static java.lang.String.format;
 
 public class Function {
 
-    private final AddEntryFacade facade = new AddEntryFacade();
+    private final AddEntryFacade facade = new AddEntryFacade(new ObjectMapper(), new GitHubClient());
 
     @FunctionName("entry")
     public HttpResponseMessage run(
@@ -38,7 +39,7 @@ public class Function {
             request.createResponseBuilder(HttpStatus.BAD_REQUEST)
                     .body("Could not parse request body")
                     .build();
-        } catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException | HttpResponseException e) {
             request.createResponseBuilder(HttpStatus.BAD_REQUEST)
                     .body(e.getMessage())
                     .build();
