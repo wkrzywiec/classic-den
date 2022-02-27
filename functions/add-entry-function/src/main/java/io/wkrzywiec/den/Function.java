@@ -18,7 +18,7 @@ import static java.lang.String.format;
 
 public class Function {
 
-    private final AddEntryFacade facade = new AddEntryFacade(new ObjectMapper(), new GitHubClient());
+    private final AddEntryFacade facade = new AddEntryFacade(new ObjectMapper(), new GitHubClientImpl());
 
     @FunctionName("entry")
     public HttpResponseMessage run(

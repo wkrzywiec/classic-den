@@ -3,13 +3,13 @@ package io.wkrzywiec.den
 import spock.lang.Specification
 import spock.lang.Subject
 
-@Subject(GitHubClient)
-class GitHubClientSpec extends Specification {
+@Subject(GitHubClientImpl)
+class GitHubClientImplSpec extends Specification {
 
-    GitHubClient github
+    GitHubClientImpl github
 
     def setup() {
-        github = new GitHubClient()
+        github = new GitHubClientImpl()
     }
 
     def "Load indexhtml file content"() {

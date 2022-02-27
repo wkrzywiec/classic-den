@@ -7,11 +7,15 @@ import org.apache.http.client.HttpResponseException;
 import static io.restassured.RestAssured.get;
 import static java.lang.String.format;
 
-class GitHubClient {
+interface GitHubClient {
+    String loadFileFrom(String repository, String branch, String filePath) throws HttpResponseException;
+}
+
+class GitHubClientImpl implements GitHubClient {
 
     private static final String GITHUB_FILE_PATH_PATTERN = "https://raw.githubusercontent.com/%s/%s/%s";
 
-    String loadFileFrom(String repository, String branch, String filePath) throws HttpResponseException {
+    public String loadFileFrom(String repository, String branch, String filePath) throws HttpResponseException {
 
         Response response = get(format(GITHUB_FILE_PATH_PATTERN, repository, branch, filePath));
 
