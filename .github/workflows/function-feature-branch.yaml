@@ -1,0 +1,30 @@
+name: Functions - feature branch
+
+on:
+  push:
+    paths:
+      - 'functions/**'
+      - '.github/**'
+    branches-ignore:
+      - 'main'
+
+jobs:
+  test:
+    name: Unit Test
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        function:
+          - 'add-entry-function'
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up JDK 8
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+
+      - name: Maven Verify
+        run: |
+          cd functions/${{ matrix.function }}
+          mvn -B clean verify
