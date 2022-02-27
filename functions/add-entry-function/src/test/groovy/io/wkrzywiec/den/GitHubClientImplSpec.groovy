@@ -14,9 +14,9 @@ class GitHubClientImplSpec extends Specification {
 
     def "Load indexhtml file content"() {
         when:
-        String indexHtml = github.loadFileFrom("wkrzywiec/classic-den", "main", "web-page/index.html")
+        String indexHtml = github.loadFileFrom("wkrzywiec/classic-den", "main", "web-page/entries.html")
 
         then:
-        indexHtml.contains("Classic Den")
+        indexHtml.contains("entries-container")
     }
 }

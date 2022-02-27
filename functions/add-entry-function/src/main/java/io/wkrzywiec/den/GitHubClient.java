@@ -9,12 +9,14 @@ import static java.lang.String.format;
 
 interface GitHubClient {
     String loadFileFrom(String repository, String branch, String filePath) throws HttpResponseException;
+    void updateFile(String repository, String branch, String filePath, String content);
 }
 
 class GitHubClientImpl implements GitHubClient {
 
     private static final String GITHUB_FILE_PATH_PATTERN = "https://raw.githubusercontent.com/%s/%s/%s";
 
+    @Override
     public String loadFileFrom(String repository, String branch, String filePath) throws HttpResponseException {
 
         Response response = get(format(GITHUB_FILE_PATH_PATTERN, repository, branch, filePath));
@@ -23,5 +25,10 @@ class GitHubClientImpl implements GitHubClient {
             throw new HttpResponseException(400, "Unable to load file from GitHub");
         }
         return response.getBody().asString();
+    }
+
+    @Override
+    public void updateFile(String repository, String branch, String filePath, String content) {
+
     }
 }
