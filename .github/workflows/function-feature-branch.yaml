@@ -1,11 +1,11 @@
-name: Functions - feature branch
+name: Functions - main branch
 
 on:
   push:
     paths:
       - 'functions/**'
       - '.github/**'
-    branches-ignore:
+    branches:
       - 'main'
 
 jobs:

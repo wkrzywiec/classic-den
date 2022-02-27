@@ -1,14 +1,21 @@
-name: Functions - main branch
+name: Functions - feature branch
 
 on:
   push:
-    branches:
+    paths:
+      - 'functions/**'
+      - '.github/**'
+    branches-ignore:
       - 'main'
 
 jobs:
-  add-entry-function:
-    name: Add Entry Function
+  test:
+    name: Unit Test
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        function:
+          - 'add-entry-function'
 
     steps:
       - uses: actions/checkout@v2
@@ -17,16 +24,7 @@ jobs:
         with:
           java-version: 1.8
 
-      - name: Run tests
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Maven Verify
         run: |
-          cd functions/add-entry-function
+          cd functions/${{ matrix.function }}
           mvn -B clean verify
-
-      - name: Publish results to SonarCloud
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          cd functions/add-entry-function
-          mvn -B org.sonarsource.scanner.maven:sonar-maven-plugin:3.9.1.2184:sonar -P sonar -Dsonar.login=${{ secrets.ADD_ENTRY_SONAR_TOKEN }}
