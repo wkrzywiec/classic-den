@@ -25,6 +25,8 @@ jobs:
           java-version: 1.8
 
       - name: Maven Verify
+        env:
+          CLASSIC_DEN_GITHUB_ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           cd functions/${{ matrix.function }}
           mvn -B clean verify
