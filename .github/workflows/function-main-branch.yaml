@@ -7,6 +7,7 @@ on:
       - '.github/**'
     branches-ignore:
       - 'main'
+      - 'test-branch'
 
 jobs:
   test:
