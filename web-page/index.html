@@ -61,7 +61,7 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form>
+                    <form id="form" action="/api/entry" method="POST">
                         <div class="modal-body">
                             <h2 class="form-signin-heading" style="margin-bottom: 20px;">What you would like to share?</h2>
 
@@ -110,7 +110,25 @@
         $(function(){
           $("#entriesContent").load("entries.html");
         });
-        </script>
+</script>
+<script>
+      document.addEventListener("submit", function (event) {
+        event.preventDefault();
+        const form = event.target;
+        fetch(form.action, {
+          method: form.method,
+          body: new FormData(form),
+        })
+          .then(function (response) {
+            if (response.ok) {
+              form.reset();
+            }
+          })
+          .catch(function (error) {
+            console.warn(error);
+          });
+      });
+</script>
 </body>
 
 </html>
