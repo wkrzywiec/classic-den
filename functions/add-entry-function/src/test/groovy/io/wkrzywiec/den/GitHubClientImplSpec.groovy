@@ -1,5 +1,6 @@
 package io.wkrzywiec.den
 
+import spock.lang.Ignore
 import spock.lang.Specification
 import spock.lang.Subject
 
@@ -24,6 +25,7 @@ class GitHubClientImplSpec extends Specification {
         indexHtml.contains("entries-container")
     }
 
+    @Ignore
     def "Upload file"() {
         given:
         def repository = "wkrzywiec/classic-den"
@@ -39,6 +41,7 @@ class GitHubClientImplSpec extends Specification {
         github.updateFile(repository, branch, filePath, content)
 
         then:
+        Thread.sleep(10_000)
         given()
                 .log().all()
                 .get(format("https://raw.githubusercontent.com/%s/%s/%s", repository, branch, filePath))
