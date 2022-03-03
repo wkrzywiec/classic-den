@@ -10,7 +10,17 @@
     <link href="assets/css/bootstrap.css" rel="stylesheet">
     <link href="style.css" rel="stylesheet">
     <link rel="shortcut icon" href="../assets/ico/favicon.png">
-</head>
+
+    <script src="assets/js/jquery.js"></script>
+    <script src="assets/js/bootstrap.js"></script>
+    <script src="assets/js/bootstrap.bundle.js"></script>
+    <script>
+        $(function(){
+          $("#entriesContent").load("entries.html");
+        });
+    </script>
+    <script src="form.js"></script>
+    </head>
 
 <body>
 
@@ -61,7 +71,7 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form id="form" action="https://classic-den-add-entry-function.azurewebsites.net/api/entry" method="POST">
+                    <form id="form" action="" method="POST">
                         <div class="modal-body">
                             <h2 class="form-signin-heading" style="margin-bottom: 20px;">What you would like to share?</h2>
 
@@ -82,8 +92,8 @@
 
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary" type="submit">Save changes</button>
+                            <button class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button class="btn btn-primary" type="submit">Save changes</button>
                         </div>
                     </form>
                 </div>
@@ -102,33 +112,6 @@
     </div>
 
 </div>
-
-<script src="assets/js/jquery.js"></script>
-<script src="assets/js/bootstrap.js"></script>
-<script src="assets/js/bootstrap.bundle.js"></script>
-<script>
-        $(function(){
-          $("#entriesContent").load("entries.html");
-        });
-</script>
-<script>
-      document.addEventListener("submit", function (event) {
-        event.preventDefault();
-        const form = event.target;
-        fetch(form.action, {
-          method: form.method,
-          body: new FormData(form),
-        })
-          .then(function (response) {
-            if (response.ok) {
-              form.reset();
-            }
-          })
-          .catch(function (error) {
-            console.warn(error);
-          });
-      });
-</script>
 </body>
 
 </html>
