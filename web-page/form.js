@@ -6,7 +6,7 @@ $(document).ready(function () {
     
     var request = $.ajax({
       type: "POST",
-      url: "https://classic-den-add-entry-function.azurewebsites.net/api/entry",
+      url: "https://classic-den-functions.azurewebsites.net/api/entry",
       dataType: "json",
       contentType: "application/json",
       data: JSON.stringify({

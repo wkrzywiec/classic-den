@@ -3,18 +3,18 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>io.wkrzywiec.den</groupId>
-    <artifactId>add-entry-function</artifactId>
+    <artifactId>classic-den-functions</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>Classic Den - Add entry function</name>
+    <name>Classic Den Functions</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.8</java.version>
         <azure.functions.maven.plugin.version>1.15.0</azure.functions.maven.plugin.version>
         <azure.functions.java.library.version>1.4.2</azure.functions.java.library.version>
-        <functionAppName>add-entry-function-1645599228225</functionAppName>
+        <functionAppName>classic-den-functions</functionAppName>
     </properties>
 
     <dependencyManagement>
