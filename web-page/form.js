@@ -1,6 +1,9 @@
 $(document).ready(function () {
   $("form").submit(function (event) {
-
+    
+    $('#addEntryModal').modal('hide');
+    document.getElementById('alert-info').hidden = false;
+    
     var request = $.ajax({
       type: "POST",
       url: "https://classic-den-add-entry-function.azurewebsites.net/api/entry",
@@ -13,20 +16,31 @@ $(document).ready(function () {
       }),
       statusCode: {
         202: function() {
-            $('#addEntryModal').modal('hide');
+            document.getElementById('alert-info').hidden = true;
+            document.getElementById('alert-success').hidden = false;
             document.getElementById("form").reset();
+        }
+      },
+      error: function(xhr, ajaxOptions, thrownError) {
+        if(xhr.status != 202){
+          document.getElementById('alert-info').hidden = true;
+          document.getElementById('alert-error').hidden = false;
         }
       }
     });
 
-    request.done(function (data) {
-        console.log(data);
-        console.log('Sth');
-        if (!data.success) {} else {}
+   event.preventDefault();
+  });
 
-    });
+  $("#alert-info-btn").click(function() {
+    document.getElementById('alert-info').hidden = true;
+  });
 
+  $("#alert-success-btn").click(function() {
+    document.getElementById('alert-success').hidden = true;
+  });
 
-    event.preventDefault();
+  $("#alert-error-btn").click(function() {
+    document.getElementById('alert-error').hidden = true;
   });
 });

@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Template &middot; Bootstrap</title>
+    <title>Home &middot; Classic Den</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="Wojciech Krzywiec">
@@ -24,94 +24,109 @@
 
 <body>
 
-<div class="container-narrow">
-
-    <div class="masthead">
-        <ul class="nav nav-pills pull-right">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="contact.html">Contact</a></li>
-        </ul>
-        <h3 class="muted">Classic Den</h3>
+    <div id="alert-info" class="alert alert-info" hidden>
+        <button id="alert-info-btn" type="button" class="close">&times;</button>
+        Processing...
     </div>
 
-    <hr>
+    <div id="alert-success" class="alert alert-success" hidden>
+        <button id="alert-success-btn" type="button" class="close">&times;</button>
+        Your entry has been accepted for further processing. It should be visible on a page after couple of minutes...
+    </div>
 
-    <div class="jumbotron">
-        <h1>A place for nerds like You!</h1>
-        <p class="lead" style="margin-top: 20px;">
-            Classic Den is a place for all kinds of nerds that are exhausted of all this pretty-looking nonsense that can be seen other than the Internet.
-            Nowadays all websites are written to be as simple, slick, and elegant as they could be. Ugh!
-        </p>
-        <p>
-            <i><u>Do all these people remember the Golden Age of computers?</i></u>
-        </p>
-        <p>
-            By Golden Age, I mean of course when a Terminal was the King!
-        </p>
-        <p>
-            With this page, I want to bring those time back. Below you can share your thoughts, make announcements, post an ad, ask for help, and many more.
-            Just hit the <i><strong>Add Entry</strong></i> button, type whatever you want and share with other old friends!
-        </p>
-        <p>
-            Each Entry will be removed after <u>2 days</u> once it's published!
-        </p>
+    <div id="alert-error" class="alert alert-info" hidden>
+        <button id="alert-error-btn" type="button" class="close">&times;</button>
+        Ups.. something bad happend
+    </div>
 
-        <button type="button" class="btn btn-large btn-success" data-toggle="modal" data-target="#addEntryModal">
-            Add Entry
-        </button>
+    <div class="container-narrow">
 
-        <div class="modal fade" id="addEntryModal" tabindex="-1" role="dialog" aria-labelledby="addEntryModalLabel"
-             aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="addEntryModalLabel">Add new entry to a board</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+        <div class="masthead">
+            <ul class="nav nav-pills pull-right">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <h3 class="muted">Classic Den</h3>
+        </div>
+
+        <hr>
+
+        <div class="jumbotron">
+            <h1>A place for nerds like You!</h1>
+            <p class="lead" style="margin-top: 20px;">
+                Classic Den is a place for all kinds of nerds that are exhausted of all this pretty-looking nonsense that can be seen other than the Internet.
+                Nowadays all websites are written to be as simple, slick, and elegant as they could be. Ugh!
+            </p>
+            <p>
+                <i><u>Do all these people remember the Golden Age of computers?</i></u>
+            </p>
+            <p>
+                By Golden Age, I mean of course when a Terminal was the King!
+            </p>
+            <p>
+                With this page, I want to bring those time back. Below you can share your thoughts, make announcements, post an ad, ask for help, and many more.
+                Just hit the <i><strong>Add Entry</strong></i> button, type whatever you want and share with other old friends!
+            </p>
+            <p>
+                Each Entry will be removed after <u>2 weeks</u> once it's published!
+            </p>
+
+            <button type="button" class="btn btn-large btn-success" data-toggle="modal" data-target="#addEntryModal">
+                Add new Post
+            </button>
+
+            <div class="modal fade" id="addEntryModal" tabindex="-1" role="dialog" aria-labelledby="addEntryModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="addEntryModalLabel">Add new entry to a board</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <form id="form" action="" method="POST">
+                            <div class="modal-body">
+                                <h2 class="form-signin-heading" style="margin-bottom: 20px;">What you would like to share?</h2>
+
+                                <div class="d-flex flex-column" style="margin-bottom: 20px;">
+                                    <label for="titleText">Title</label>
+                                    <input type="text" id="titleText" class="input-block-level" placeholder="Title">
+                                </div>
+
+                                <div class="d-flex flex-column" style="margin-bottom: 20px;">
+                                    <label for="authorText">Author</label>
+                                    <input type="text" id="authorText" class="input-block-level" placeholder="Your name">
+                                </div>
+
+                                <div class="d-flex flex-column">
+                                    <label for="descriptionTextarea">Description</label>
+                                    <textarea class="form-control" id="descriptionTextarea" rows="6"></textarea>
+                                </div>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button class="btn btn-primary" type="submit">Save changes</button>
+                            </div>
+                        </form>
                     </div>
-                    <form id="form" action="" method="POST">
-                        <div class="modal-body">
-                            <h2 class="form-signin-heading" style="margin-bottom: 20px;">What you would like to share?</h2>
-
-                            <div class="d-flex flex-column" style="margin-bottom: 20px;">
-                                <label for="titleText">Title</label>
-                                <input type="text" id="titleText" class="input-block-level" placeholder="Title">
-                            </div>
-
-                            <div class="d-flex flex-column" style="margin-bottom: 20px;">
-                                <label for="authorText">Author</label>
-                                <input type="text" id="authorText" class="input-block-level" placeholder="Your name">
-                            </div>
-
-                            <div class="d-flex flex-column">
-                                <label for="descriptionTextarea">Description</label>
-                                <textarea class="form-control" id="descriptionTextarea" rows="6"></textarea>
-                            </div>
-
-                        </div>
-                        <div class="modal-footer">
-                            <button class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button class="btn btn-primary" type="submit">Save changes</button>
-                        </div>
-                    </form>
                 </div>
             </div>
         </div>
+
+        <hr>
+
+        <div id="entriesContent"></div>
+
+        <hr>
+
+        <div class="footer">
+            <p>&copy; Wojciech Krzywiec 2022</p>
+        </div>
+
     </div>
-
-    <hr>
-
-    <div id="entriesContent"></div>
-
-    <hr>
-
-    <div class="footer">
-        <p>&copy; Wojciech Krzywiec 2022</p>
-    </div>
-
-</div>
 </body>
 
 </html>
