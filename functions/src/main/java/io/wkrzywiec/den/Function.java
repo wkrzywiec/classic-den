@@ -20,8 +20,8 @@ public class Function {
 
     private final AddEntryFacade facade = new AddEntryFacade(new ObjectMapper(), new GitHubClientImpl());
 
-    @FunctionName("entry")
-    public HttpResponseMessage run(
+    @FunctionName("addEntry")
+    public HttpResponseMessage addEntry(
             @HttpTrigger(
                 name = "req",
                 methods = {HttpMethod.POST},
