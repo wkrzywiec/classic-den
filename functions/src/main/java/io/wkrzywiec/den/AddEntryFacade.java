@@ -7,6 +7,8 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,10 +18,12 @@ class AddEntryFacade {
 
     private final ObjectMapper objectMapper;
     private final GitHubClient gitHub;
+    private final LocalDate localDate;
 
-    public AddEntryFacade(ObjectMapper objectMapper, GitHubClient gitHub) {
+    public AddEntryFacade(ObjectMapper objectMapper, GitHubClient gitHub, LocalDate localDate) {
         this.objectMapper = objectMapper;
         this.gitHub = gitHub;
+        this.localDate = localDate;
     }
 
     void proccessRequest(String body) throws JsonProcessingException, IllegalArgumentException, HttpResponseException {
@@ -54,10 +58,12 @@ class AddEntryFacade {
     }
 
     private Document addEntryToDocument(Document entriesDoc, Map<String, String> requestMap) {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("uuuu-MM-dd");
+
         Element element = entriesDoc.select("#entries-container").first();
 
-        element.append(format("<div class=\"span6\"><h4>%s</h4><p>%s</p></div>",
-                requestMap.get("title"), requestMap.get("message"))
+        element.append(format("<div class=\"span6\"><h4>%s</h4><p class=\"entry-message\">%s</p><p class=\"entry-published\">%s<span class=\"entry-author\">%s</span></p></div>",
+                requestMap.get("title"), requestMap.get("message"), dtf.format(localDate), requestMap.get("author"))
         );
         return entriesDoc;
     }

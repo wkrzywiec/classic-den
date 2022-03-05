@@ -12,16 +12,17 @@ import com.microsoft.azure.functions.annotation.FunctionName;
 import com.microsoft.azure.functions.annotation.HttpTrigger;
 import org.apache.http.client.HttpResponseException;
 
+import java.time.LocalDate;
 import java.util.Optional;
 
 import static java.lang.String.format;
 
 public class Function {
 
-    private final AddEntryFacade facade = new AddEntryFacade(new ObjectMapper(), new GitHubClientImpl());
+    private final AddEntryFacade facade = new AddEntryFacade(new ObjectMapper(), new GitHubClientImpl(), LocalDate.now());
 
-    @FunctionName("entry")
-    public HttpResponseMessage run(
+    @FunctionName("addEntry")
+    public HttpResponseMessage addEntry(
             @HttpTrigger(
                 name = "req",
                 methods = {HttpMethod.POST},
