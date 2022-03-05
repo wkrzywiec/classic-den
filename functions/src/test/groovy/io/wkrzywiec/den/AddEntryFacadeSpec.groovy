@@ -6,6 +6,8 @@ import spock.lang.Specification
 import spock.lang.Subject
 import spock.lang.Unroll
 
+import java.time.LocalDate
+
 @Subject(AddEntryFacade)
 class AddEntryFacadeSpec extends Specification {
 
@@ -13,7 +15,7 @@ class AddEntryFacadeSpec extends Specification {
     GitHubClient gitHub = Mock(GitHubClient)
 
     def setup() {
-        facade = new AddEntryFacade(new ObjectMapper(), gitHub)
+        facade = new AddEntryFacade(new ObjectMapper(), gitHub, LocalDate.of(2022, 3, 8))
     }
 
     def "Add new Entry"() {
@@ -37,7 +39,8 @@ class AddEntryFacadeSpec extends Specification {
             content.replaceAll("\\s+","").contains('''
             <div class="span6">
                  <h4>Simple Title</h4>
-                 <p>Simple message added</p>
+                 <p class="entry-message">Simple message added</p>
+                 <p class="entry-published">2022-03-08<span class="entry-author">John Doe</span></p>
             </div>
             '''.replaceAll("\\s+",""))
         })

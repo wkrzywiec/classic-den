@@ -34,6 +34,25 @@ body {
     margin-top: 28px;
   }
 
+  .span6 {
+    margin-top: 40px;
+  }
+
+  .entry-message {
+    margin-bottom: 5px;
+  }
+
+  .entry-published {
+    margin-top: 1px;
+    font-style: italic;
+    text-align: left;
+    color: yellow;
+  }
+
+  .entry-author {
+    float: right;
+  }
+
   #descriptionTextarea {
     background-color: white;
     color: black;
