@@ -2,8 +2,8 @@ name: Azure Static Web Apps CI/CD
 
 on:
   push:
-#    paths:
-#      - 'web-page/**'
+    paths:
+      - 'web-page/**'
     branches:
       - main
 

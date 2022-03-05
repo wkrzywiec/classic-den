@@ -13,10 +13,6 @@ jobs:
   test:
     name: Unit Test
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        function:
-          - 'add-entry-function'
 
     steps:
       - uses: actions/checkout@v2
@@ -29,5 +25,5 @@ jobs:
         env:
           CLASSIC_DEN_GITHUB_ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          cd functions/${{ matrix.function }}
+          cd functions
           mvn -B clean verify
