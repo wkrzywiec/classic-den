@@ -14,7 +14,6 @@ import com.microsoft.azure.functions.annotation.TimerTrigger;
 import org.apache.http.client.HttpResponseException;
 
 import java.time.Clock;
-import java.time.LocalDate;
 import java.util.Optional;
 
 import static java.lang.String.format;
@@ -40,7 +39,7 @@ public class Function {
         context.getLogger().info(format("Adding entry: %s", requestBody));
 
         try {
-            entryFacade.proccessRequest(requestBody);
+            entryFacade.proccessCreateRequest(requestBody);
 
         } catch (JsonProcessingException e) {
             request.createResponseBuilder(HttpStatus.BAD_REQUEST)

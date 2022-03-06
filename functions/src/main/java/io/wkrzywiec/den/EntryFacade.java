@@ -10,7 +10,6 @@ import org.jsoup.select.Elements;
 
 import java.time.Clock;
 import java.time.Instant;
-import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.HashMap;
@@ -32,7 +31,7 @@ class EntryFacade {
         dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd").withZone(clock.getZone());
     }
 
-    void proccessRequest(String body) throws JsonProcessingException, IllegalArgumentException, HttpResponseException {
+    void proccessCreateRequest(String body) throws JsonProcessingException, IllegalArgumentException, HttpResponseException {
 
         Map<String, String> requestMap = parseRequestBody(body);
         validateBody(requestMap);
