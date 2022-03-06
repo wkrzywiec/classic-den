@@ -7,23 +7,26 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
-import java.time.LocalDate;
+import java.time.Clock;
+import java.time.Instant;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 
 import static java.lang.String.format;
 
-class AddEntryFacade {
+class EntryFacade {
 
     private final ObjectMapper objectMapper;
-    private final GitHubClient gitHub;
-    private final LocalDate localDate;
+    private final GitHubClient github;
+    private final Clock clock;
+    private final DateTimeFormatter dtf;
 
-    public AddEntryFacade(ObjectMapper objectMapper, GitHubClient gitHub, LocalDate localDate) {
+    public EntryFacade(ObjectMapper objectMapper, GitHubClient github, Clock clock) {
         this.objectMapper = objectMapper;
-        this.gitHub = gitHub;
-        this.localDate = localDate;
+        this.github = github;
+        this.clock = clock;
+        dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd").withZone(clock.getZone());
     }
 
     void proccessRequest(String body) throws JsonProcessingException, IllegalArgumentException, HttpResponseException {
@@ -31,12 +34,21 @@ class AddEntryFacade {
         Map<String, String> requestMap = parseRequestBody(body);
         validateBody(requestMap);
 
-        String entriesHtmlContent = gitHub.loadFileFrom("wkrzywiec/classic-den", "main", "web-page/entries.html");
+        String entriesHtmlContent = github.loadFileFrom("wkrzywiec/classic-den", "main", "web-page/entries.html");
 
         Document entriesDoc = parseEntriesHtlm(entriesHtmlContent);
         entriesDoc = addEntryToDocument(entriesDoc, requestMap);
 
-        gitHub.updateFile("wkrzywiec/classic-den", "main", "web-page/entries.html", entriesDoc.body().html());
+        github.updateFile("wkrzywiec/classic-den", "main", "web-page/entries.html", entriesDoc.body().html());
+    }
+
+    void removeOutdatedEntries() throws HttpResponseException {
+
+        String entriesHtmlContent = github.loadFileFrom("wkrzywiec/classic-den", "main", "web-page/entries.html");
+        Document entriesDoc = parseEntriesHtlm(entriesHtmlContent);
+
+
+
     }
 
     private Map<String, String> parseRequestBody(String body) throws JsonProcessingException {
@@ -54,16 +66,15 @@ class AddEntryFacade {
 
     private Document parseEntriesHtlm(String entriesHtmlContent) {
         return Jsoup.parse(entriesHtmlContent);
-
     }
 
     private Document addEntryToDocument(Document entriesDoc, Map<String, String> requestMap) {
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("uuuu-MM-dd");
-
         Element element = entriesDoc.select("#entries-container").first();
 
-        element.append(format("<div class=\"span6\"><h4>%s</h4><p class=\"entry-message\">%s</p><p class=\"entry-published\">%s<span class=\"entry-author\">%s</span></p></div>",
-                requestMap.get("title"), requestMap.get("message"), dtf.format(localDate), requestMap.get("author"))
+        Instant now = clock.instant();
+
+        element.append(format("<div class=\"span6\" id=\"%s\"><h4>%s</h4><p class=\"entry-message\">%s</p><p class=\"entry-published\">%s<span class=\"entry-author\">%s</span></p></div>",
+                now.toEpochMilli(), requestMap.get("title"), requestMap.get("message"), dtf.format(now), requestMap.get("author"))
         );
         return entriesDoc;
     }

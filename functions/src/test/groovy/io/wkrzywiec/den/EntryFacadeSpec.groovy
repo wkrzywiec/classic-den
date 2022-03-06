@@ -6,16 +6,19 @@ import spock.lang.Specification
 import spock.lang.Subject
 import spock.lang.Unroll
 
-import java.time.LocalDate
+import java.time.Clock
+import java.time.Instant
+import java.time.ZoneId
 
-@Subject(AddEntryFacade)
-class AddEntryFacadeSpec extends Specification {
+@Subject(EntryFacade)
+class EntryFacadeSpec extends Specification {
 
-    AddEntryFacade facade
+    EntryFacade facade
     GitHubClient gitHub = Mock(GitHubClient)
+    def testTime = Instant.parse("2022-03-08T10:15:30.00Z")
 
     def setup() {
-        facade = new AddEntryFacade(new ObjectMapper(), gitHub, LocalDate.of(2022, 3, 8))
+        facade = new EntryFacade(new ObjectMapper(), gitHub, Clock.fixed(testTime, ZoneId.of("Europe/Paris")))
     }
 
     def "Add new Entry"() {
@@ -37,7 +40,7 @@ class AddEntryFacadeSpec extends Specification {
         then:
         1* gitHub.updateFile(_, _, _, {content ->
             content.replaceAll("\\s+","").contains('''
-            <div class="span6">
+            <div class="span6" id="1646734530000">
                  <h4>Simple Title</h4>
                  <p class="entry-message">Simple message added</p>
                  <p class="entry-published">2022-03-08<span class="entry-author">John Doe</span></p>

@@ -10,8 +10,10 @@ import com.microsoft.azure.functions.HttpStatus;
 import com.microsoft.azure.functions.annotation.AuthorizationLevel;
 import com.microsoft.azure.functions.annotation.FunctionName;
 import com.microsoft.azure.functions.annotation.HttpTrigger;
+import com.microsoft.azure.functions.annotation.TimerTrigger;
 import org.apache.http.client.HttpResponseException;
 
+import java.time.Clock;
 import java.time.LocalDate;
 import java.util.Optional;
 
@@ -19,7 +21,11 @@ import static java.lang.String.format;
 
 public class Function {
 
-    private final AddEntryFacade facade = new AddEntryFacade(new ObjectMapper(), new GitHubClientImpl(), LocalDate.now());
+    private final EntryFacade entryFacade;
+
+    public Function() {
+        entryFacade = new EntryFacade(new ObjectMapper(), new GitHubClientImpl(), Clock.systemUTC());
+    }
 
     @FunctionName("addEntry")
     public HttpResponseMessage addEntry(
@@ -27,14 +33,14 @@ public class Function {
                 name = "req",
                 methods = {HttpMethod.POST},
                 authLevel = AuthorizationLevel.ANONYMOUS)
-                HttpRequestMessage<Optional<String>> request,
+            HttpRequestMessage<Optional<String>> request,
             final ExecutionContext context) {
 
         String requestBody = request.getBody().orElse("");
         context.getLogger().info(format("Adding entry: %s", requestBody));
 
         try {
-            facade.proccessRequest(requestBody);
+            entryFacade.proccessRequest(requestBody);
 
         } catch (JsonProcessingException e) {
             request.createResponseBuilder(HttpStatus.BAD_REQUEST)
@@ -48,5 +54,19 @@ public class Function {
 
         return request.createResponseBuilder(HttpStatus.ACCEPTED)
                 .build();
+    }
+
+    @FunctionName("removeEntries")
+    public void removeEntries(
+            @TimerTrigger(name = "removeEntriesTrigger", schedule = "0 4 * * *") String timerInfo,
+            ExecutionContext context) {
+
+        context.getLogger().info("Timer is triggered: " + timerInfo);
+
+        try {
+            entryFacade.removeOutdatedEntries();
+        } catch (HttpResponseException e) {
+            context.getLogger().warning("Failed to remove entries! Cause:" + e.getMessage());
+        }
     }
 }
