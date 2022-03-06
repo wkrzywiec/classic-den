@@ -37,10 +37,12 @@ class EntryFacadeSpec extends Specification {
         '''
 
         when:
-        facade.proccessRequest(requestBody)
+        facade.proccessCreateRequest(requestBody)
 
         then:
         1* gitHub.updateFile(_, _, _, {content ->
+            totalEntries(content) == 4
+
             content.replaceAll("\\s+","").contains('''
             <div class="span6" id="1646734530000">
                  <h4>Simple Title</h4>
@@ -54,7 +56,7 @@ class EntryFacadeSpec extends Specification {
     @Unroll
     def "Invalid request body: #requestBody"() {
         when:
-        facade.proccessRequest(requestBody)
+        facade.proccessCreateRequest(requestBody)
 
         then:
         thrown(exception)
@@ -119,5 +121,9 @@ class EntryFacadeSpec extends Specification {
             </div>
         </div>
         """, String.valueOf(timeCreated.toEpochMilli()))
+    }
+
+    int totalEntries(String content) {
+        return (content.length() - content.replaceAll("span6","").length()) / 5
     }
 }
