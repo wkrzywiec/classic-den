@@ -65,7 +65,7 @@ public class Function {
 
         try {
             entryFacade.removeOutdatedEntries();
-        } catch (HttpResponseException e) {
+        } catch (HttpResponseException | JsonProcessingException e) {
             context.getLogger().warning("Failed to remove entries! Cause:" + e.getMessage());
         }
     }

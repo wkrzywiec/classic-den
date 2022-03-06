@@ -6,10 +6,13 @@ import org.apache.http.client.HttpResponseException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 import java.time.Clock;
 import java.time.Instant;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -42,13 +45,14 @@ class EntryFacade {
         github.updateFile("wkrzywiec/classic-den", "main", "web-page/entries.html", entriesDoc.body().html());
     }
 
-    void removeOutdatedEntries() throws HttpResponseException {
+    void removeOutdatedEntries() throws HttpResponseException, JsonProcessingException {
 
         String entriesHtmlContent = github.loadFileFrom("wkrzywiec/classic-den", "main", "web-page/entries.html");
         Document entriesDoc = parseEntriesHtlm(entriesHtmlContent);
 
+        entriesDoc = removeOutdatedEntriesFromDoc(entriesDoc);
 
-
+        github.updateFile("wkrzywiec/classic-den", "main", "web-page/entries.html", entriesDoc.body().html());
     }
 
     private Map<String, String> parseRequestBody(String body) throws JsonProcessingException {
@@ -77,5 +81,47 @@ class EntryFacade {
                 now.toEpochMilli(), requestMap.get("title"), requestMap.get("message"), dtf.format(now), requestMap.get("author"))
         );
         return entriesDoc;
+    }
+
+    private Document removeOutdatedEntriesFromDoc(Document entriesDoc) {
+        Element entriesContainer = entriesDoc.select("#entries-container").first();
+        Elements entries = entriesContainer.children();
+
+        for (Element entry: entries) {
+            String elementId = extractElementId(entry);
+            if (elementId == null) continue;
+
+            Instant elementCreatedTime = convertIdToInstant(elementId);
+            if (elementCreatedTime == null) continue;
+
+            if (elementCreatedTime.plus(2 * 7, ChronoUnit.DAYS).isBefore(clock.instant())) {
+                entry.remove();
+            }
+        }
+
+        return entriesDoc;
+    }
+
+    private String extractElementId(Element entry) {
+        String elementId = entry.id();
+
+        if (elementId.isEmpty()) {
+            System.out.print("Could not remove entry. No id found");
+            return null;
+        }
+        return elementId;
+    }
+
+    private Instant convertIdToInstant(String elementId) {
+        long elementCreatedEpoch;
+        try {
+            elementCreatedEpoch = Long.parseLong(elementId);
+        } catch (NumberFormatException e) {
+            System.out.printf("Could not remove entry with id: %s. Could not convert it to long", elementId);
+            return null;
+        }
+
+        Instant elementCreatedTime = Instant.ofEpochMilli(elementCreatedEpoch);
+        return elementCreatedTime;
     }
 }
