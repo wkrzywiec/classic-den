@@ -1,5 +1,10 @@
 # Classic Den
-> Project submitted to the [Microsoft Azure Trial Hackathon](https://dev.to/devteam/hack-the-microsoft-azure-trial-on-dev-2ne5). Submission post on the Dev.to. 
+> Project submitted to the [Microsoft Azure Trial Hackathon](https://dev.to/devteam/hack-the-microsoft-azure-trial-on-dev-2ne5). Submission post on the Dev.to.
+
+![java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=java&logoColor=white) ![html](https://img.shields.io/badge/HTML-239120?style=for-the-badge&logo=html5&logoColor=white) ![css](https://img.shields.io/badge/CSS-239120?&style=for-the-badge&logo=css3&logoColor=white) ![js](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black) ![azure](https://img.shields.io/badge/Microsoft_Azure-0089D6?style=for-the-badge&logo=microsoft-azure&logoColor=white) [![Azure Static Web Apps CI/CD](https://github.com/wkrzywiec/classic-den/actions/workflows/azure-static-web-apps.yml/badge.svg)](https://github.com/wkrzywiec/classic-den/actions/workflows/azure-static-web-apps.yml) [![Functions - main branch](https://github.com/wkrzywiec/classic-den/actions/workflows/function-feature-branch.yaml/badge.svg)](https://github.com/wkrzywiec/classic-den/actions/workflows/function-feature-branch.yaml) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+
+
 
 ![classic-den-demo](/assets/classic-den-demo.gif)
 
